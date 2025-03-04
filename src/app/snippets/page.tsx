@@ -9,7 +9,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import SnippetsPageSkeleton from "./_components/SnippetsPageSkeleton";
 import SnippetCard from "./_components/SnippetCard";
-function page() {
+function Page() {
   const snippets = useQuery(api.snippets.getSnippets);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
@@ -229,4 +229,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

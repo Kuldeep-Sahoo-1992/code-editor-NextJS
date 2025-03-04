@@ -137,3 +137,13 @@ export const getSnippetStarCount = query({
         return stars.length;
     },
 });
+export const getSnippetByid = query({
+  args: {
+    snippetId:v.id("snippets"),
+  },
+  handler:async (ctx,args) =>{
+    const snippet = ctx.db.get(args.snippetId)
+    if (!snippet) throw new ConvexError("Snippet not found");
+    return  snippet;
+  }
+})
