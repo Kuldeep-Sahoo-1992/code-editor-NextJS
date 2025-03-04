@@ -42,10 +42,10 @@ export default defineSchema({
 
   // Define the 'stars' table to store user-starred snippets
   stars: defineTable({
-    userId: v.id("users"), // ID of the user who starred the snippet
+    userId: v.string(), // ID of the user who starred the snippet
     snippetId: v.id("snippets"), // ID of the snippet that was starred
   })
     .index("by_user_id", ["userId"]) // Index the table by userId for quick lookup
     .index("by_snippet_id", ["snippetId"]) // Index the table by snippetId for quick lookup
-    .index("bu_user_id_and_snippet_id", ["userId", "snippetId"]), // Index by both userId and snippetId for quick lookup
+    .index("by_user_id_and_snippet_id", ["userId", "snippetId"]), // Index by both userId and snippetId for quick lookup
 });
