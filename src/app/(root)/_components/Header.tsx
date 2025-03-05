@@ -1,3 +1,5 @@
+
+import { currentUser } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 import React from "react";
 import { api } from "../../../../convex/_generated/api";
@@ -8,10 +10,9 @@ import LanguageSelector from "./LanguageSelector";
 import { SignedIn } from "@clerk/nextjs";
 import RunButton from "./RunButton";
 import HeaderProfileBtn from "./HeaderProfileBtn";
-import { getUser } from "@/components/provider/getUser";
 
 async function Header() {
-  const user = await getUser();
+  const user = await currentUser();
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const convexUser = await convex.query(api.users.getUser, {
     userId: user?.id || "",
