@@ -30,16 +30,15 @@ export const saveExecution = mutation({
 export const getUserExecutions = query({
   args: {
     userId: v.string(),
-    paginationOptions: paginationOptsValidator,
+    paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
-    const userExecutions = await ctx.db
+    return await ctx.db
       .query("codeExecutions")
       .withIndex("by_user_id")
       .filter((q) => q.eq(q.field("userId"), args.userId))
       .order("desc")
-      .paginate(args.paginationOptions);
-    return userExecutions;
+      .paginate(args.paginationOpts);
   },
 });
 
