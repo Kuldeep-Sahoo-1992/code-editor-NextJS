@@ -1,5 +1,6 @@
 import { Trash2Icon, UserIcon } from "lucide-react";
 import CommentContent from "./CommentContent";
+import { Id } from "../../../../../convex/_generated/dataModel";
 
 
 interface CommentProps {

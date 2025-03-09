@@ -2,7 +2,7 @@ import { useUser } from '@clerk/nextjs';
 import { useMutation } from 'convex/react';
 import React, { useState } from 'react'
 import { api } from '../../../../convex/_generated/api';
-import { Clock, Star, Trash2, User } from 'lucide-react';
+import { Clock, Trash2, User } from 'lucide-react';
 import {motion} from "framer-motion"
 import Link from 'next/link';
 import Image from 'next/image';
