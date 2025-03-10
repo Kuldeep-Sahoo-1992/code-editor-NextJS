@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { Id } from "../../../../convex/_generated/dataModel";
 import {UserResource} from "@clerk/types"
 import Image from "next/image";
+import Heatmap from "./Heatmap";
 
 interface ProfileHeaderProps {
   userStats: {
@@ -84,6 +85,9 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
     },
   ];
 
+  const executionHistory = useQuery(api.codeExecutions.getExecutionHistory) ?? [];
+
+
   return (
     <div
       className="relative mb-8 bg-gradient-to-br from-[#12121a] to-[#1a1a2e] rounded-2xl p-8 border
@@ -127,7 +131,6 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
           </p>
         </div>
       </div>
-
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
         {STATS.map((stat, index) => (
@@ -184,6 +187,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
           </motion.div>
         ))}
       </div>
+      <Heatmap data={executionHistory} />
     </div>
   );
 }

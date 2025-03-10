@@ -110,3 +110,32 @@ export const getUserStats = query({
     };
   },
 });
+
+
+export const getExecutionHistory = query(async ({ db }) => {
+  const executions = await db.query("codeExecutions").collect();
+
+  // Aggregate executions by date
+  const historyMap: Record<string, { success: number; error: number }> = {};
+
+  executions.forEach((execution) => {
+    const date = new Date(execution._creationTime).toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+    if (!historyMap[date]) {
+      historyMap[date] = { success: 0, error: 0 };
+    }
+
+    if (execution.error) {
+      historyMap[date].error += 1;
+    } else {
+      historyMap[date].success += 1;
+    }
+  });
+
+  // Convert object to array format
+  return Object.entries(historyMap).map(([date, { success, error }]) => ({
+    date,
+    success,
+    error,
+  }));
+});
